@@ -1,0 +1,2179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vertex Events — Kandy's Premier Event Company</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --teal: #0D9488;
+            --teal2: #14B8A6;
+            --teal3: #0F766E;
+            --gold: #F59E0B;
+            --gold2: #FBBF24;
+            --dark: #080F0E;
+            --dark2: #0E1917;
+            --dark3: #162421;
+            --surface: #1C2E2B;
+            --surface2: #243A36;
+            --text: #E2F0EE;
+            --muted: #6B9E98;
+            --border: rgba(13,148,136,0.2);
+            --red: #EF4444;
+            --amber: #F59E0B;
+            --green: #10B981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans',sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .screen {
+            display: none;
+        }
+
+            .screen.show {
+                display: block;
+            }
+
+        /* NAV */
+        .home-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 3rem;
+            height: 68px;
+            background: rgba(8,15,14,0.90);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg,var(--teal),var(--teal3));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .nav-name {
+            font-family: 'Syne',sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--muted);
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+            .nav-link:hover {
+                color: var(--text);
+            }
+
+        .nav-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+            background: var(--dark);
+            background-image: radial-gradient(ellipse at 50% 0%,rgba(13,148,136,0.25) 0%,transparent 60%), radial-gradient(ellipse at 20% 80%,rgba(13,148,136,0.1) 0%,transparent 50%), radial-gradient(ellipse at 80% 60%,rgba(13,148,136,0.08) 0%,transparent 40%);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(13,148,136,0.12);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 0.78rem;
+            color: var(--teal2);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Syne',sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+        }
+
+            .hero h1 span {
+                color: var(--teal2);
+            }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--muted);
+            max-width: 580px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--muted);
+            font-size: 0.78rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom,var(--teal),transparent);
+        }
+
+        /* STATS */
+        .stats-strip {
+            background: var(--dark2);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 2.5rem 3rem;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .strip-val {
+            font-family: 'Syne',sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--teal2);
+        }
+
+        .strip-lbl {
+            font-size: 0.8rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* SECTIONS */
+        .section {
+            padding: 5rem 3rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-tag {
+            font-size: 0.75rem;
+            color: var(--teal2);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-family: 'Syne',sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-sub {
+            color: var(--muted);
+            font-size: 0.95rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+
+
+        /* EVENT CARDS */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .event-card {
+            background: var(--dark2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.25s,box-shadow 0.25s,border-color 0.25s;
+        }
+
+            .event-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+                border-color: var(--teal3);
+            }
+
+
+        .ec-img {
+            height: 10px;
+            background: linear-gradient(90deg,var(--teal3),var(--teal));
+        }
+
+
+        .ec-body {
+            padding: 1.25rem;
+        }
+
+        .ec-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .ec-type {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--teal2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ec-source {
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+
+
+        .ec-title {
+            font-family: 'Syne',sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .ec-detail {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .ec-footer {
+            padding: 1rem 1.25rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ec-cap {
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        .bar {
+            height: 3px;
+            background: var(--surface2);
+            border-radius: 2px;
+            margin-top: 4px;
+            width: 100px;
+        }
+
+        .bar-fill {
+            height: 3px;
+            background: var(--teal);
+            border-radius: 2px;
+        }
+
+            .bar-fill.full {
+                background: var(--red);
+            }
+
+
+        /* FEATURES */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--dark2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: border-color 0.2s;
+        }
+
+            .feature-card:hover {
+                border-color: var(--teal3);
+            }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(13,148,136,0.12);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .feature-title {
+            font-family: 'Syne',sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* HOW IT WORKS */
+
+
+
+
+
+        /* CTA */
+        .cta-section {
+            background: var(--dark2);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 5rem 3rem;
+            text-align: center;
+            background-image: radial-gradient(ellipse at 50% 50%,rgba(13,148,136,0.12) 0%,transparent 70%);
+        }
+
+            .cta-section h2 {
+                font-family: 'Syne',sans-serif;
+                font-size: 2.2rem;
+                font-weight: 800;
+                margin-bottom: 1rem;
+            }
+
+            .cta-section p {
+                color: var(--muted);
+                font-size: 0.95rem;
+                margin-bottom: 2rem;
+                max-width: 480px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+        /* FOOTER */
+        footer {
+            padding: 2rem 3rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-brand {
+            font-family: 'Syne',sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .footer-note {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* AUTH */
+        .auth-screen {
+            min-height: 100vh;
+            display: flex;
+            background: var(--dark);
+            background-image: radial-gradient(ellipse at 15% 50%,rgba(13,148,136,0.18) 0%,transparent 55%),radial-gradient(ellipse at 85% 20%,rgba(13,148,136,0.1) 0%,transparent 50%);
+        }
+
+        .auth-left {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            background: rgba(13,148,136,0.04);
+            border-right: 1px solid var(--border);
+        }
+
+        .auth-left-content {
+            max-width: 420px;
+        }
+
+        .auth-left h2 {
+            font-family: 'Syne',sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .auth-left p {
+            color: var(--muted);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-bullet {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+            .auth-bullet span:first-child {
+                color: var(--teal2);
+                font-size: 1rem;
+                margin-top: 1px;
+            }
+
+        .auth-right {
+            width: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .auth-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+
+            .auth-back:hover {
+                color: var(--text);
+            }
+
+        .auth-heading {
+            font-family: 'Syne',sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 0.4rem;
+        }
+
+        .auth-sub {
+            color: var(--muted);
+            font-size: 0.88rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .tabs {
+            display: flex;
+            background: var(--dark3);
+            border-radius: 10px;
+            padding: 4px;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 9px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--muted);
+            transition: all 0.2s;
+        }
+
+            .tab-btn.active {
+                background: var(--teal);
+                color: #fff;
+            }
+
+        /* BUTTONS */
+        .btn {
+            padding: 10px 22px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-family: 'DM Sans',sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-teal {
+            background: var(--teal);
+            color: #fff;
+        }
+
+            .btn-teal:hover {
+                background: var(--teal2);
+            }
+
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+        }
+
+            .btn-outline:hover {
+                border-color: var(--teal);
+                color: var(--teal);
+            }
+
+        .btn-ghost {
+            background: rgba(13,148,136,0.1);
+            color: var(--teal2);
+            border: 1px solid var(--border);
+        }
+
+            .btn-ghost:hover {
+                background: rgba(13,148,136,0.18);
+            }
+
+        .btn-sm {
+            padding: 7px 16px;
+            font-size: 0.8rem;
+        }
+
+        .btn-lg {
+            padding: 13px 28px;
+            font-size: 0.95rem;
+        }
+
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+            padding: 13px;
+        }
+
+        .btn-danger {
+            background: rgba(239,68,68,0.12);
+            color: var(--red);
+            border: 1px solid rgba(239,68,68,0.2);
+        }
+
+            .btn-danger:hover {
+                background: rgba(239,68,68,0.2);
+            }
+
+        .btn-amber {
+            background: rgba(245,158,11,0.12);
+            color: var(--amber);
+            border: 1px solid rgba(245,158,11,0.2);
+        }
+
+            .btn-amber:hover {
+                background: rgba(245,158,11,0.2);
+            }
+
+        /* FORMS */
+        .fg {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 1rem;
+        }
+
+        label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, select, textarea {
+            background: var(--dark3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 11px 14px;
+            color: var(--text);
+            font-family: 'DM Sans',sans-serif;
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
+        }
+
+            input:focus, select:focus, textarea:focus {
+                outline: none;
+                border-color: var(--teal);
+            }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .alert {
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+            .alert.show {
+                display: block;
+            }
+
+        .alert-error {
+            background: rgba(239,68,68,0.1);
+            color: var(--red);
+            border: 1px solid rgba(239,68,68,0.2);
+        }
+
+        .alert-success {
+            background: rgba(16,185,129,0.1);
+            color: var(--green);
+            border: 1px solid rgba(16,185,129,0.2);
+        }
+
+        /* APP */
+        .app-screen {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: var(--dark2);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .sidebar-brand {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sb-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sb-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg,var(--teal),var(--teal3));
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .sb-name {
+            font-family: 'Syne',sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .sb-tag {
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+
+        .sidebar-user {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .su-name {
+            font-family: 'Syne',sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .su-role {
+            font-size: 0.72rem;
+            color: var(--teal2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 3px 0;
+        }
+
+        .su-email {
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
+        .snav {
+            padding: 1rem 0.75rem;
+            flex: 1;
+        }
+
+        .nsec {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 0.5rem 0.75rem 0.4rem;
+            margin-top: 0.5rem;
+        }
+
+        .nitem {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            color: var(--muted);
+            transition: all 0.15s;
+            border-left: 3px solid transparent;
+            margin-bottom: 2px;
+        }
+
+            .nitem:hover {
+                color: var(--text);
+                background: var(--dark3);
+            }
+
+            .nitem.active {
+                color: var(--teal2);
+                border-left-color: var(--teal);
+                background: rgba(13,148,136,0.08);
+            }
+
+        .nicon {
+            font-size: 1rem;
+            width: 22px;
+            text-align: center;
+        }
+
+        .sfooter {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .sync-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            background: rgba(13,148,136,0.08);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+            .sync-badge span:last-child {
+                font-size: 0.77rem;
+                color: var(--muted);
+                line-height: 1.4;
+            }
+
+            .sync-badge strong {
+                color: var(--teal2);
+                display: block;
+            }
+
+        .main {
+            margin-left: 260px;
+            flex: 1;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .dpage {
+            display: none;
+        }
+
+            .dpage.active {
+                display: block;
+            }
+
+        .ph {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .pt {
+            font-family: 'Syne',sans-serif;
+            font-size: 1.9rem;
+            font-weight: 800;
+        }
+
+        .ps {
+            color: var(--muted);
+            font-size: 0.88rem;
+            margin-top: 4px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat {
+            background: var(--dark2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.25rem;
+        }
+
+        .sv {
+            font-family: 'Syne',sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--teal2);
+        }
+
+        .sl {
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .card {
+            background: var(--dark2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .ch {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            .ch h3 {
+                font-family: 'Syne',sans-serif;
+                font-size: 1rem;
+                font-weight: 700;
+            }
+
+        .cb {
+            padding: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 10px 1rem;
+            text-align: left;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 13px 1rem;
+            font-size: 0.87rem;
+            border-bottom: 1px solid rgba(13,148,136,0.06);
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(13,148,136,0.03);
+        }
+
+        .abtns {
+            display: flex;
+            gap: 6px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .b-active {
+            background: rgba(16,185,129,0.12);
+            color: var(--green);
+        }
+
+        .b-inactive {
+            background: rgba(239,68,68,0.12);
+            color: var(--red);
+        }
+
+        .b-city {
+            background: rgba(59,130,246,0.12);
+            color: #60A5FA;
+        }
+
+        .b-org {
+            background: rgba(245,158,11,0.12);
+            color: var(--amber);
+        }
+
+
+        .b-type {
+            background: rgba(13,148,136,0.12);
+            color: var(--teal2);
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+            .overlay.open {
+                display: flex;
+            }
+
+        .modal {
+            background: var(--dark2);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            width: 100%;
+            max-width: 520px;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+            overflow: hidden;
+        }
+
+        .mh {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            .mh h2 {
+                font-family: 'Syne',sans-serif;
+                font-size: 1.1rem;
+                font-weight: 700;
+            }
+
+        .mx {
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .mb {
+            padding: 1.5rem;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .mf {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 9999;
+            background: var(--surface);
+            color: var(--text);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--teal);
+            font-size: 0.9rem;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            max-width: 340px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+
+            .toast.show {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .toast.error {
+                border-left-color: var(--red);
+            }
+
+            .toast.success {
+                border-left-color: var(--green);
+            }
+
+        .empty {
+            text-align: center;
+            padding: 3rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* ═══════════════ RESPONSIVE ═══════════════ */
+
+        /* Tablet — 1024px */
+        @media (max-width: 1024px) {
+            .home-nav {
+                padding: 0 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .stats-strip {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 2rem 1.5rem;
+            }
+
+            .section {
+                padding: 3.5rem 1.5rem;
+            }
+
+        {
+            padding: 3.5rem 1.5rem;
+        }
+
+        .cta-section {
+            padding: 3.5rem 1.5rem;
+        }
+
+        footer {
+            padding: 1.5rem;
+        }
+        /* Dashboard */
+        .sidebar {
+            width: 220px;
+        }
+
+        .main {
+            margin-left: 220px;
+        }
+
+        }
+
+        /* Mobile — 768px */
+        @media (max-width: 768px) {
+            /* Nav */
+            .home-nav {
+                padding: 0 1rem;
+                height: 60px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            /* Hero */
+            .hero {
+                padding: 5rem 1.25rem 3rem;
+            }
+
+                .hero h1 {
+                    font-size: 2.2rem;
+                }
+
+                .hero p {
+                    font-size: 0.95rem;
+                }
+
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+
+                .hero-btns .btn {
+                    width: 100%;
+                    max-width: 320px;
+                    justify-content: center;
+                }
+
+            /* Stats strip */
+            .stats-strip {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 1.5rem 1rem;
+                gap: 0.75rem;
+            }
+
+            .strip-val {
+                font-size: 1.7rem;
+            }
+
+            /* Sections */
+            .section {
+                padding: 3rem 1rem;
+            }
+
+        {
+            padding: 3rem 1rem;
+        }
+
+        .section-title {
+            font-size: 1.7rem;
+        }
+
+        .cta-section {
+            padding: 3rem 1rem;
+        }
+
+            .cta-section h2 {
+                font-size: 1.7rem;
+            }
+
+            .cta-section > div {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-section .btn {
+                width: 100%;
+                max-width: 320px;
+                justify-content: center;
+            }
+
+        /* Events grid */
+        .events-grid {
+            grid-template-columns: 1fr;
+        }
+
+        /* Features grid */
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+
+        /* How it works */
+
+        /* Footer */
+        footer {
+            flex-direction: column;
+            text-align: center;
+            padding: 1.5rem 1rem;
+        }
+
+        /* Auth screen */
+        .auth-screen {
+            flex-direction: column;
+        }
+
+        .auth-left {
+            display: none;
+        }
+
+        .auth-right {
+            width: 100%;
+            padding: 1.5rem 1rem;
+        }
+
+        .auth-card {
+            padding: 1.75rem 1.25rem;
+        }
+
+        /* Dashboard — collapse sidebar */
+        .app-screen {
+            flex-direction: column;
+        }
+
+        .sidebar {
+            width: 100%;
+            height: auto;
+            position: relative;
+            border-right: none;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-brand {
+            padding: 1rem 1.25rem 0.75rem;
+        }
+
+        .sidebar-user {
+            display: none;
+        }
+
+        .snav {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 4px;
+            padding: 0.5rem 1rem;
+        }
+
+        .nsec {
+            display: none;
+        }
+
+        .nitem {
+            flex: 0 0 auto;
+            border-left: none;
+            border-bottom: 3px solid transparent;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            padding: 8px 10px;
+        }
+
+            .nitem.active {
+                border-left: none;
+                border-bottom-color: var(--teal);
+            }
+
+        .sfooter {
+            display: none;
+        }
+
+        .main {
+            margin-left: 0;
+            padding: 1.25rem 1rem;
+        }
+
+        /* Dashboard tables — horizontal scroll */
+        .card {
+            overflow-x: auto;
+        }
+
+        table {
+            min-width: 540px;
+        }
+
+        /* Page headers */
+        .ph {
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .pt {
+            font-size: 1.5rem;
+        }
+
+        /* Stats grid in dashboard */
+        .stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        /* Modals */
+        .modal {
+            margin: 1rem;
+            padding: 1.5rem;
+            max-width: calc(100vw - 2rem);
+        }
+
+        .form-row {
+            grid-template-columns: 1fr !important;
+        }
+
+        }
+
+        /* Small mobile — 480px */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.85rem;
+            }
+
+            .stats-strip {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .nav-name {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════════ HOME ═══════════════ -->
+    <div class="screen show" id="homeScreen">
+
+        <nav class="home-nav">
+            <div class="nav-brand">
+                <div class="nav-icon">🎪</div>
+                <div class="nav-name">Vertex Events</div>
+            </div>
+            <div class="nav-links">
+                <span class="nav-link" onclick="scrollToSec('our-events-section')">Our Events</span>
+                <span class="nav-link" onclick="scrollToSec('features-section')">Features</span>
+            </div>
+            <div class="nav-actions">
+                <button class="btn btn-teal btn-sm" onclick="openAuth()">Staff Login</button>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div>
+                <div class="hero-badge">✨ Kandy's Premier Event Company</div>
+                <h1>Kandy's Premier<br /><span>Event Management</span><br />Company</h1>
+                <p>Discover and register for our upcoming events across Kandy. From cultural celebrations to music nights — Vertex Events brings the city together.</p>
+                <div class="hero-btns">
+                    <button class="btn btn-teal btn-lg" onclick="scrollToSec('our-events-section')">🎉 View Our Events</button>
+                </div>
+            </div>
+            <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll to explore</span></div>
+        </section>
+
+        <div class="stats-strip">
+            <div><div class="strip-val" id="homeStatEvents">—</div><div class="strip-lbl">Total Events</div></div>
+            <div><div class="strip-val" id="homeStatOwn">—</div><div class="strip-lbl">Our Events</div></div>
+            <div><div class="strip-val">24/7</div><div class="strip-lbl">Platform Uptime</div></div>
+        </div>
+
+        <!-- OUR OWN EVENTS -->
+        <section class="section" id="our-events-section">
+            <div class="section-header">
+                <div class="section-tag">Vertex Events Originals</div>
+                <h2 class="section-title">Our Events</h2>
+                <p class="section-sub">Events created and hosted by Vertex Events.</p>
+            </div>
+            <div class="events-grid" id="ownEventsGrid">
+                <p style="color:var(--muted);text-align:center;grid-column:1/-1">Loading events...</p>
+            </div>
+
+        </section>
+
+
+        <!-- FEATURES -->
+        <section class="section" id="features-section" style="background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+            <div class="section-header">
+                <div class="section-tag">Why Vertex Events</div>
+                <h2 class="section-title">Everything You Need</h2>
+                <p class="section-sub">Built for event organizers in Kandy, integrated with city infrastructure.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card"><div class="feature-icon">🏛️</div><div class="feature-title">City-Wide Reach</div><p class="feature-desc">Every event you create is broadcast across our partner network, reaching the entire city instantly through multiple channels.</p></div>
+                <div class="feature-card"><div class="feature-icon">👥</div><div class="feature-title">Unified Registrations</div><p class="feature-desc">Registrations from all partner platforms appear in your dashboard in real time. No manual data entry, no duplication.</p></div>
+                <div class="feature-card"><div class="feature-icon">📊</div><div class="feature-title">Live Dashboard</div><p class="feature-desc">Track registrations, capacity, and event performance from a single dashboard. See exactly where each attendee came from.</p></div>
+                <div class="feature-card"><div class="feature-icon">🔒</div><div class="feature-title">Secure & Reliable</div><p class="feature-desc">JWT-secured API with role-based access. Only you can edit your own events. Your data stays yours.</p></div>
+                <div class="feature-card"><div class="feature-icon">🔍</div><div class="feature-title">Discoverable Events</div><p class="feature-desc">Visitors can search and filter your events by category, date, and name — across all connected platforms simultaneously.</p></div>
+                <div class="feature-card"><div class="feature-icon">⚡</div><div class="feature-title">Instant Sync</div><p class="feature-desc">Create an event here and it appears across all connected platforms within seconds. No approval wait, no manual uploads.</p></div>
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2>Ready to experience Kandy's best events?</h2>
+            <p>Browse our upcoming events and be part of the moments that bring the city together.</p>
+            <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+                <button class="btn btn-teal btn-lg" onclick="scrollToSec('our-events-section')">View Upcoming Events</button>
+                <button class="btn btn-outline btn-lg" onclick="openAuth()">Staff Login</button>
+            </div>
+        </div>
+
+        <footer>
+            <div>
+                <div class="footer-brand">🎪 Vertex Events</div>
+                <div class="footer-note">Kandy's premier event management platform</div>
+            </div>
+            <div class="footer-note">© 2025 Vertex Events. All rights reserved.</div>
+        </footer>
+
+    </div>
+
+    <!-- ═══════════════ AUTH ═══════════════ -->
+    <div class="screen" id="authScreen">
+        <div class="auth-screen">
+            <div class="auth-left">
+                <div class="auth-left-content">
+                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:2rem;cursor:pointer" onclick="goHome()">
+                        <div class="nav-icon" style="width:36px;height:36px;font-size:1rem">🎪</div>
+                        <div class="nav-name">Vertex Events</div>
+                    </div>
+                    <h2>Staff Portal.<br />Manage your events.</h2>
+                    <p>Login to the Vertex Events dashboard to create and manage events, track registrations, and monitor performance.</p>
+                    <div class="auth-bullet"><span>✅</span><span>Create and publish events instantly</span></div>
+                    <div class="auth-bullet"><span>✅</span><span>Track registrations in real time</span></div>
+                    <div class="auth-bullet"><span>✅</span><span>Monitor capacity and event performance</span></div>
+                    <div style="margin-top:2rem;padding:1.25rem;background:rgba(13,148,136,0.08);border:1px solid var(--border);border-radius:12px">
+                        <div style="font-size:0.72rem;color:var(--teal2);text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:0.5rem">Demo Account</div>
+                        <div style="font-size:0.85rem;color:var(--muted);line-height:1.8">
+                            Email: <strong style="color:var(--text)">organizer@kandyevents.lk</strong><br />
+                            Password: <strong style="color:var(--text)">password123</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="auth-right">
+                <div class="auth-card">
+                    <div class="auth-back" onclick="goHome()">← Back to home</div>
+                    <h1 class="auth-heading">Welcome back</h1>
+                    <p class="auth-sub">Login to the Vertex Events staff portal</p>
+                    <div class="tabs">
+                        <div class="tab-btn active">Login</div>
+                    </div>
+                    <div id="alertAuth" class="alert"></div>
+                    <div id="loginPane">
+                        <div class="fg"><label>Email</label><input type="email" id="lEmail" placeholder="organizer@kandyevents.lk" /></div>
+                        <div class="fg"><label>Password</label><input type="password" id="lPassword" placeholder="••••••••" /></div>
+                        <button class="btn btn-teal btn-block" onclick="doLogin()">Login to Portal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ DASHBOARD ═══════════════ -->
+    <div class="screen" id="appScreen">
+        <div class="app-screen">
+            <div class="sidebar">
+                <div class="sidebar-brand">
+                    <div class="sb-brand">
+                        <div class="sb-icon">🎪</div>
+                        <div><div class="sb-name">Vertex Events</div><div class="sb-tag">Organizer Portal</div></div>
+                    </div>
+                </div>
+                <div class="sidebar-user">
+                    <div class="su-name" id="sbName">—</div>
+                    <div class="su-role">Event Organizer</div>
+                    <div class="su-email" id="sbEmail">—</div>
+                </div>
+                <nav class="snav">
+                    <div class="nsec">Main</div>
+                    <div class="nitem active" onclick="showDPage('dashboard',this)"><span class="nicon">📊</span>Dashboard</div>
+                    <div class="nitem" onclick="showDPage('myevents',this)"><span class="nicon">📅</span>My Events</div>
+                    <div class="nitem" onclick="showDPage('create',this)"><span class="nicon">➕</span>Create Event</div>
+                    <div class="nsec">Data</div>
+                    <div class="nitem" onclick="showDPage('registrations',this)"><span class="nicon">👥</span>Registrations</div>
+                    <div class="nitem" onclick="showDPage('allevents',this)"><span class="nicon">🌐</span>All Platform Events</div>
+                </nav>
+                <div class="sfooter">
+                    <div class="sync-badge">
+                        <span>🔄</span>
+                        <span>Synced to <strong>Partner Platforms</strong> — events visible city-wide</span>
+                    </div>
+                    <button class="btn btn-outline" style="width:100%;font-size:0.82rem;justify-content:center" onclick="doLogout()">Logout</button>
+                </div>
+            </div>
+            <div class="main">
+
+                <!-- DASHBOARD PAGE -->
+                <div class="dpage active" id="dp-dashboard">
+                    <div class="ph">
+                        <div><div class="pt">Dashboard</div><div class="ps">Your event overview</div></div>
+                        <button class="btn btn-teal btn-sm" onclick="showDPage('create',document.querySelectorAll('.nitem')[2])">+ New Event</button>
+                    </div>
+                    <div class="stats">
+                        <div class="stat"><div class="sv" id="stTotal">0</div><div class="sl">My Events</div></div>
+                        <div class="stat"><div class="sv" id="stActive">0</div><div class="sl">Active</div></div>
+                        <div class="stat"><div class="sv" id="stRegs">0</div><div class="sl">Registrations</div></div>
+                    </div>
+                    <div class="card">
+                        <div class="ch"><h3>📅 Recent Events</h3><button class="btn btn-ghost btn-sm" onclick="showDPage('myevents',document.querySelectorAll('.nitem')[1])">View All</button></div>
+                        <table><thead><tr><th>Event</th><th>Date</th><th>Category</th><th>Registrations</th><th>Status</th></tr></thead><tbody id="dashTbl"></tbody></table>
+                    </div>
+                </div>
+
+                <!-- MY EVENTS PAGE -->
+                <div class="dpage" id="dp-myevents">
+                    <div class="ph">
+                        <div><div class="pt">My Events</div><div class="ps">All your published events</div></div>
+                        <button class="btn btn-teal btn-sm" onclick="showDPage('create',document.querySelectorAll('.nitem')[2])">+ Create New</button>
+                    </div>
+                    <div class="card">
+                        <table><thead><tr><th>Title</th><th>Category</th><th>Date</th><th>Location</th><th>Capacity</th><th>Status</th><th>Actions</th></tr></thead><tbody id="myEvTbl"></tbody></table>
+                    </div>
+                </div>
+
+                <!-- CREATE PAGE -->
+                <div class="dpage" id="dp-create">
+                    <div class="ph">
+                        <div><div class="pt" id="createTitle">Create New Event</div><div class="ps">Your event will be published on the Vertex Events website</div></div>
+                        <button class="btn btn-outline btn-sm" id="cancelBtn" style="display:none" onclick="cancelEdit()">Cancel Edit</button>
+                    </div>
+                    <div class="card">
+                        <div class="cb">
+                            <div id="alertCreate" class="alert"></div>
+                            <div class="form-row">
+                                <div class="fg"><label>Event Title *</label><input type="text" id="evTitle" placeholder="e.g. Sunset Jazz Night" /></div>
+                                <div class="fg">
+                                    <label>Category *</label>
+                                    <select id="evType">
+                                        <option value="Cultural">🎭 Cultural</option>
+                                        <option value="Sports">⚽ Sports</option>
+                                        <option value="Music">🎵 Music</option>
+                                        <option value="Community">🤝 Community</option>
+                                        <option value="Food">🍛 Food</option>
+                                        <option value="Business">💼 Business</option>
+                                        <option value="Other">📌 Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="fg"><label>Location *</label><input type="text" id="evLocation" placeholder="e.g. The Hill Club, Kandy" /></div>
+                                <div class="fg"><label>Capacity *</label><input type="number" id="evCapacity" placeholder="100" min="1" /></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="fg"><label>Date & Time *</label><input type="datetime-local" id="evDate" /></div>
+                                <div class="fg"><label>Image URL <span style="color:var(--muted);font-weight:400">(optional)</span></label><input type="url" id="evImageUrl" placeholder="https://..." /></div>
+                            </div>
+                            <div class="fg"><label>Description *</label><textarea id="evDesc" placeholder="Tell people what to expect..."></textarea></div>
+                            <button class="btn btn-teal" style="width:100%;justify-content:center;padding:13px" id="submitBtn" onclick="submitEvent()">🚀 Publish Event</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REGISTRATIONS PAGE -->
+                <div class="dpage" id="dp-registrations">
+                    <div class="ph"><div><div class="pt">Registrations</div><div class="ps">Attendees from all platforms</div></div></div>
+                    <div class="fg" style="max-width:340px;margin-bottom:1.5rem">
+                        <label>Select Event</label>
+                        <select id="regSel" onchange="loadRegs()"><option value="">— Choose an event —</option></select>
+                    </div>
+                    <div id="regsContent"></div>
+                </div>
+
+                <!-- ALL EVENTS PAGE -->
+                <div class="dpage" id="dp-allevents">
+                    <div class="ph"><div><div class="pt">All Platform Events</div><div class="ps">Every event across the network</div></div></div>
+                    <div style="display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap">
+                        <input type="text" id="allSearch" placeholder="🔍 Search..." oninput="filterAll()" style="flex:1;min-width:180px;padding:11px 14px;background:var(--dark2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif" />
+                        <select id="allType" onchange="filterAll()" style="padding:11px 14px;background:var(--dark2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif">
+                            <option value="">All Categories</option>
+                            <option value="Cultural">Cultural</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Music">Music</option>
+                            <option value="Community">Community</option>
+                            <option value="Food">Food</option>
+                            <option value="Business">Business</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="events-grid" id="allGrid"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW EVENT MODAL -->
+    <div class="overlay" id="viewModal">
+        <div class="modal" style="max-width:560px">
+            <div id="viewHeroBar" style="height:6px;background:linear-gradient(90deg,var(--teal3),var(--teal2))"></div>
+            <div class="mh"><h2>Event Details</h2><button class="mx" onclick="closeM('viewModal')">×</button></div>
+            <div class="mb">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:0.75rem;flex-wrap:wrap">
+                    <span id="viewType" style="font-size:0.72rem;font-weight:700;color:var(--teal2);background:rgba(13,148,136,0.12);border-radius:20px;padding:3px 10px;text-transform:uppercase;letter-spacing:1px"></span>
+                </div>
+                <div id="viewTitle" style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;line-height:1.3;margin-bottom:1.25rem"></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.25rem">
+                    <div style="background:var(--dark3);border-radius:10px;padding:0.85rem 1rem">
+                        <div style="font-size:0.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">📅 Date & Time</div>
+                        <div id="viewDate" style="font-size:0.88rem;font-weight:500"></div>
+                    </div>
+                    <div style="background:var(--dark3);border-radius:10px;padding:0.85rem 1rem">
+                        <div style="font-size:0.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">📍 Location</div>
+                        <div id="viewLocation" style="font-size:0.88rem;font-weight:500"></div>
+                    </div>
+                    <div style="background:var(--dark3);border-radius:10px;padding:0.85rem 1rem">
+                        <div style="font-size:0.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">👤 Organizer</div>
+                        <div id="viewOrganizer" style="font-size:0.88rem;font-weight:500"></div>
+                    </div>
+                    <div style="background:var(--dark3);border-radius:10px;padding:0.85rem 1rem">
+                        <div style="font-size:0.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">🎟️ Capacity</div>
+                        <div id="viewCapacity" style="font-size:0.88rem;font-weight:500"></div>
+                    </div>
+                </div>
+                <div style="font-size:0.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.5rem">About this event</div>
+                <div id="viewDesc" style="font-size:0.88rem;color:var(--muted);line-height:1.7"></div>
+                <div style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border)">
+                    <div style="font-size:0.75rem;color:var(--muted);margin-bottom:6px;display:flex;justify-content:space-between">
+                        <span>Registration</span><span id="viewCapText"></span>
+                    </div>
+                    <div style="height:6px;background:var(--surface2);border-radius:3px">
+                        <div id="viewBarFill" style="height:6px;border-radius:3px;background:var(--teal2);transition:width 0.5s ease"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="mf">
+                <button class="btn btn-outline btn-sm" onclick="closeM('viewModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- EDIT MODAL -->
+    <div class="overlay" id="editModal">
+        <div class="modal">
+            <div class="mh"><h2>Edit Event</h2><button class="mx" onclick="closeM('editModal')">×</button></div>
+            <div class="mb">
+                <div id="alertEdit" class="alert"></div>
+                <div class="form-row">
+                    <div class="fg"><label>Title</label><input type="text" id="editTitle" /></div>
+                    <div class="fg">
+                        <label>Category</label>
+                        <select id="editType">
+                            <option value="Cultural">Cultural</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Music">Music</option>
+                            <option value="Community">Community</option>
+                            <option value="Food">Food</option>
+                            <option value="Business">Business</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="fg"><label>Location</label><input type="text" id="editLoc" /></div>
+                    <div class="fg"><label>Capacity</label><input type="number" id="editCap" /></div>
+                </div>
+                <div class="form-row">
+                    <div class="fg"><label>Date</label><input type="datetime-local" id="editDate" /></div>
+                    <div class="fg"><label>Image URL <span style="color:var(--muted);font-weight:400">(optional)</span></label><input type="url" id="editImgUrl" placeholder="https://..." /></div>
+                </div>
+                <div class="fg"><label>Description</label><textarea id="editDesc"></textarea></div>
+            </div>
+            <div class="mf">
+                <button class="btn btn-outline btn-sm" onclick="closeM('editModal')">Cancel</button>
+                <button class="btn btn-teal btn-sm" onclick="submitEdit()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DELETE MODAL -->
+    <div class="overlay" id="delModal">
+        <div class="modal" style="max-width:400px">
+            <div class="mh"><h2>Delete Event</h2><button class="mx" onclick="closeM('delModal')">×</button></div>
+            <div class="mb"><p style="color:var(--muted);line-height:1.6">Are you sure you want to delete <strong style="color:var(--text)" id="delTitle"></strong>? It will be removed from all connected platforms.</p></div>
+            <div class="mf">
+                <button class="btn btn-outline btn-sm" onclick="closeM('delModal')">Cancel</button>
+                <button class="btn btn-danger btn-sm" onclick="confirmDel()">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ─── CONFIG ───────────────────────────────────────────────
+        // Change this to your deployed API URL when going live
+        const API = 'https://localhost:7057/api';
+
+        // ─── STATE ────────────────────────────────────────────────
+        let myEvents = [], allEvents = [], homeEvents = [], editId = null, delId = null;
+
+        // ─── HELPERS ──────────────────────────────────────────────
+        const getToken = () => localStorage.getItem('org_token');
+        const getUser = () => { try { return JSON.parse(localStorage.getItem('org_user')); } catch { return null; } };
+        const authH = () => ({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getToken() });
+
+        // API returns "date" on EventResponse — normalise just in case
+        const evDate = e => e.date || e.eventDate;
+        const evRegs = e => e.registrationCount ?? e.registeredCount ?? 0;
+
+
+        const fmt = d => new Date(d).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+
+        function toast(msg, type = 'success') {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = `toast ${type} show`;
+            setTimeout(() => t.className = 'toast', 3500);
+        }
+        function showA(id, msg, type) { const e = document.getElementById(id); e.textContent = msg; e.className = `alert alert-${type} show`; }
+        function clearA(id) { const e = document.getElementById(id); e.textContent = ''; e.className = 'alert'; }
+        function closeM(id) { document.getElementById(id).classList.remove('open'); }
+        function scrollToSec(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
+        function showScreen(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('show')); document.getElementById(id).classList.add('show'); }
+        function goHome() { showScreen('homeScreen'); }
+        function openAuth() { showScreen('authScreen'); clearA('alertAuth'); }
+
+        // ─── HOME PAGE ────────────────────────────────────────────
+        async function loadHomeEvents() {
+            try {
+                const res = await fetch(`${API}/events`);
+                homeEvents = await res.json();
+
+                document.getElementById('homeStatEvents').textContent = homeEvents.length;
+                document.getElementById('homeStatOwn').textContent = homeEvents.length;
+
+                const grid = document.getElementById('ownEventsGrid');
+                grid.innerHTML = homeEvents.length
+                    ? homeEvents.slice(0, 6).map(e => buildCard(e)).join('')
+                    : '<p style="color:var(--muted);text-align:center;grid-column:1/-1">No events yet.</p>';
+            } catch {
+                document.getElementById('ownEventsGrid').innerHTML = '<p style="color:var(--muted);text-align:center;grid-column:1/-1">Could not load events. Make sure the API is running.</p>';
+            }
+        }
+
+        function buildCard(e) {
+            const registered = evRegs(e);
+            const pct = e.capacity > 0 ? Math.min(100, Math.round(registered / e.capacity * 100)) : 0;
+            const full = pct >= 100;
+            return `<div class="event-card">
+            <div class="ec-img"></div>
+            <div class="ec-body">
+              <div class="ec-meta">
+                <div class="ec-type">${e.type}</div>
+                <div class="ec-source">🎪 Vertex Events</div>
+              </div>
+              <div class="ec-title">${e.title}</div>
+              <div class="ec-detail"><span>📅</span><span>${fmt(evDate(e))}</span></div>
+              <div class="ec-detail"><span>📍</span><span>${e.location}</span></div>
+              <div class="ec-detail"><span>👤</span><span>${e.organizerName}</span></div>
+            </div>
+            <div class="ec-footer">
+              <div class="ec-cap">${registered}/${e.capacity} registered
+                <div class="bar"><div class="bar-fill ${full ? 'full' : ''}" style="width:${pct}%"></div></div>
+              </div>
+              ${full
+                    ? '<button class="btn btn-sm" style="background:var(--surface2);color:var(--muted);cursor:not-allowed">Full</button>'
+                    : `<button class="btn btn-ghost btn-sm" onclick="openViewModal(${e.id})">View Event</button>`}
+            </div>
+          </div>`;
+        }
+
+        // ─── VIEW EVENT ───────────────────────────────────────────
+        function openViewModal(id) {
+            const e = [...allEvents, ...homeEvents].find(ev => ev.id === id);
+            if (!e) return;
+            const registered = evRegs(e);
+            const pct = e.capacity > 0 ? Math.min(100, Math.round(registered / e.capacity * 100)) : 0;
+            const full = pct >= 100;
+            document.getElementById('viewType').textContent = e.type;
+            document.getElementById('viewTitle').textContent = e.title;
+            document.getElementById('viewDate').textContent = new Date(evDate(e)).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+            document.getElementById('viewLocation').textContent = e.location;
+            document.getElementById('viewOrganizer').textContent = e.organizerName;
+            document.getElementById('viewCapacity').textContent = e.capacity + ' spots';
+            document.getElementById('viewDesc').textContent = e.description || 'No description provided.';
+            document.getElementById('viewCapText').textContent = registered + ' / ' + e.capacity + ' (' + pct + '%)';
+            const fill = document.getElementById('viewBarFill');
+            fill.style.width = pct + '%';
+            fill.style.background = full ? 'var(--red)' : 'var(--teal2)';
+            document.getElementById('viewModal').classList.add('open');
+        }
+
+        // ─── AUTH ─────────────────────────────────────────────────
+        function switchAuthTab(mode) {
+            document.getElementById('loginPane').style.display = 'block';
+            document.getElementById('registerPane').style.display = 'none';
+            document.getElementById('tabLogin').classList.add('active');
+            document.getElementById('authHeading').textContent = 'Welcome back';
+            document.getElementById('authSub').textContent = 'Login to the Vertex Events staff portal';
+            clearA('alertAuth');
+        }
+
+        async function doLogin() {
+            clearA('alertAuth');
+            const email = document.getElementById('lEmail').value.trim();
+            const password = document.getElementById('lPassword').value;
+            if (!email || !password) return showA('alertAuth', 'Please fill in all fields.', 'error');
+            try {
+                const res = await fetch(`${API}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+                if (!res.ok) return showA('alertAuth', data.message || 'Login failed.', 'error');
+                if (data.role !== 'Organizer' && data.role !== 'Admin')
+                    return showA('alertAuth', 'This portal is for Organizer accounts only.', 'error');
+                startSession(data);
+            } catch { showA('alertAuth', 'Cannot connect to API. Is it running on https://localhost:7057?', 'error'); }
+        }
+
+        function startSession(data) {
+            localStorage.setItem('org_token', data.token);
+            localStorage.setItem('org_user', JSON.stringify({ name: data.name, email: data.email, role: data.role }));
+            document.getElementById('sbName').textContent = data.name;
+            document.getElementById('sbEmail').textContent = data.email;
+            showScreen('appScreen');
+            appInit();
+        }
+
+        function doLogout() {
+            localStorage.removeItem('org_token');
+            localStorage.removeItem('org_user');
+            showScreen('homeScreen');
+        }
+
+        // ─── DASHBOARD NAV ────────────────────────────────────────
+        function showDPage(name, el) {
+            document.querySelectorAll('.dpage').forEach(p => p.classList.remove('active'));
+            document.getElementById('dp-' + name).classList.add('active');
+            document.querySelectorAll('.nitem').forEach(n => n.classList.remove('active'));
+            if (el) el.classList.add('active');
+            if (name === 'myevents') renderMyEvents();
+            if (name === 'registrations') populateRegSel();
+            if (name === 'allevents') filterAll();
+            if (name === 'create' && !editId) resetForm();
+        }
+
+        async function appInit() { await fetchAll(); loadDash(); }
+
+        async function fetchAll() {
+            try {
+                // Both calls hit the same shared API:
+                // - GET /api/events          → ALL events (both KMC and Organizer source)
+                // - GET /api/events?source=Organizer filtered by organizer's own JWT
+                //   Since there's no /my-events endpoint, we filter by organizerName client-side
+                const res = await fetch(`${API}/events`);
+                allEvents = res.ok ? await res.json() : [];
+
+                // Filter to only this organizer's own events using their name from the token
+                const user = getUser();
+                myEvents = user ? allEvents.filter(e => e.organizerName === user.name) : [];
+            } catch (err) { console.error(err); }
+        }
+
+        // ─── DASHBOARD STATS ──────────────────────────────────────
+        function loadDash() {
+            document.getElementById('stTotal').textContent = myEvents.length;
+            document.getElementById('stActive').textContent = myEvents.filter(e => e.isActive).length;
+            document.getElementById('stRegs').textContent = myEvents.reduce((s, e) => s + evRegs(e), 0);
+
+            const tb = document.getElementById('dashTbl');
+            if (!myEvents.length) { tb.innerHTML = '<tr><td colspan="5" class="empty">No events yet. Create your first event!</td></tr>'; return; }
+            tb.innerHTML = myEvents.slice(0, 6).map(e => `<tr>
+            <td style="font-weight:600">${e.title}</td>
+            <td style="color:var(--muted)">${fmt(evDate(e))}</td>
+            <td><span class="badge b-type">${e.type}</span></td>
+            <td><span style="color:var(--teal2);font-weight:600">${evRegs(e)}</span>/${e.capacity}</td>
+            <td><span class="badge b-active">Active</span></td>
+          </tr>`).join('');
+        }
+
+        // ─── MY EVENTS TABLE ──────────────────────────────────────
+        function renderMyEvents() {
+            const tb = document.getElementById('myEvTbl');
+            if (!myEvents.length) { tb.innerHTML = '<tr><td colspan="7" class="empty">No events yet</td></tr>'; return; }
+            tb.innerHTML = myEvents.map(e => `<tr>
+            <td style="font-weight:600">${e.title}</td>
+            <td><span class="badge b-type">${e.type}</span></td>
+            <td style="color:var(--muted)">${fmt(evDate(e))}</td>
+            <td style="color:var(--muted)">${e.location}</td>
+            <td>${evRegs(e)}/${e.capacity}</td>
+            <td><span class="badge b-active">Active</span></td>
+            <td><div class="abtns">
+              <button class="btn btn-amber btn-sm" onclick="openEdit(${e.id})">Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="openDel(${e.id},'${e.title.replace(/'/g, "\\'")}')">Delete</button>
+            </div></td>
+          </tr>`).join('');
+        }
+
+        // ─── CREATE / EDIT ────────────────────────────────────────
+        function resetForm() {
+            editId = null;
+            ['evTitle', 'evLocation', 'evCapacity', 'evDate', 'evDesc', 'evImageUrl'].forEach(id => {
+                const el = document.getElementById(id); if (el) el.value = '';
+            });
+            document.getElementById('evType').value = 'Cultural';
+            document.getElementById('createTitle').textContent = 'Create New Event';
+            document.getElementById('submitBtn').textContent = '🚀 Publish Event';
+            document.getElementById('cancelBtn').style.display = 'none';
+            clearA('alertCreate');
+        }
+        function cancelEdit() { resetForm(); showDPage('myevents', document.querySelectorAll('.nitem')[1]); }
+
+        async function submitEvent() {
+            clearA('alertCreate');
+            const title = document.getElementById('evTitle').value.trim();
+            const type = document.getElementById('evType').value;
+            const location = document.getElementById('evLocation').value.trim();
+            const capacity = parseInt(document.getElementById('evCapacity').value);
+            const date = document.getElementById('evDate').value;
+            const desc = document.getElementById('evDesc').value.trim();
+
+            if (!title || !location || !capacity || !date || !desc)
+                return showA('alertCreate', 'Please fill in all required fields.', 'error');
+
+            try {
+                const res = await fetch(`${API}/events`, {
+                    method: 'POST',
+                    headers: authH(),
+                    body: JSON.stringify({ title, description: desc, type, location, date: new Date(date).toISOString(), capacity, source: 'Organizer' })
+                });
+                const data = await res.json();
+                if (!res.ok) return showA('alertCreate', data.message || 'Failed.', 'error');
+
+                toast('🎉 Event published!', 'success');
+                await fetchAll();
+                cancelEdit();
+                loadHomeEvents();
+            } catch { showA('alertCreate', 'Cannot connect to server.', 'error'); }
+        }
+
+        function openEdit(id) {
+            const ev = myEvents.find(e => e.id === id); if (!ev) return;
+            editId = id;
+            document.getElementById('editTitle').value = ev.title;
+            document.getElementById('editType').value = ev.type;
+            document.getElementById('editLoc').value = ev.location;
+            document.getElementById('editCap').value = ev.capacity;
+            document.getElementById('editDate').value = new Date(evDate(ev)).toISOString().slice(0, 16);
+            document.getElementById('editDesc').value = ev.description;
+            document.getElementById('editImgUrl').value = ev.imageUrl || '';
+            clearA('alertEdit');
+            document.getElementById('editModal').classList.add('open');
+        }
+
+        async function submitEdit() {
+            clearA('alertEdit');
+            const title = document.getElementById('editTitle').value.trim();
+            const type = document.getElementById('editType').value;
+            const location = document.getElementById('editLoc').value.trim();
+            const capacity = parseInt(document.getElementById('editCap').value);
+            const date = document.getElementById('editDate').value;
+            const desc = document.getElementById('editDesc').value.trim();
+
+            if (!title || !location || !capacity || !date || !desc)
+                return showA('alertEdit', 'Please fill in all fields.', 'error');
+
+            // Note: UpdateEventRequest does NOT include source — source is set at creation
+            // and cannot be changed via PUT. To change source, delete and recreate.
+            try {
+                const res = await fetch(`${API}/events/${editId}`, {
+                    method: 'PUT',
+                    headers: authH(),
+                    body: JSON.stringify({ title, description: desc, type, location, date: new Date(date).toISOString(), capacity })
+                });
+                const data = await res.json();
+                if (!res.ok) return showA('alertEdit', data.message || 'Failed.', 'error');
+
+                closeM('editModal');
+                toast('Event updated!', 'success');
+                await fetchAll(); renderMyEvents(); loadDash(); loadHomeEvents();
+            } catch { showA('alertEdit', 'Cannot connect.', 'error'); }
+        }
+
+        function openDel(id, title) {
+            delId = id;
+            document.getElementById('delTitle').textContent = title;
+            document.getElementById('delModal').classList.add('open');
+        }
+        async function confirmDel() {
+            try {
+                const res = await fetch(`${API}/events/${delId}`, { method: 'DELETE', headers: authH() });
+                if (!res.ok) { toast('Could not delete.', 'error'); return; }
+                closeM('delModal');
+                toast('Event deleted.', 'success');
+                await fetchAll(); renderMyEvents(); loadDash(); loadHomeEvents();
+            } catch { toast('Cannot connect.', 'error'); }
+        }
+
+        // ─── REGISTRATIONS ────────────────────────────────────────
+        function populateRegSel() {
+            const sel = document.getElementById('regSel');
+            sel.innerHTML = '<option value="">— Choose an event —</option>'
+                + myEvents.map(e => `<option value="${e.id}">${e.title}</option>`).join('');
+            document.getElementById('regsContent').innerHTML = '';
+        }
+
+        async function loadRegs() {
+            const id = document.getElementById('regSel').value;
+            const c = document.getElementById('regsContent');
+            if (!id) { c.innerHTML = ''; return; }
+            try {
+                const res = await fetch(`${API}/registrations/event/${id}`, { headers: authH() });
+                const regs = await res.json();
+                if (!regs.length) {
+                    c.innerHTML = '<div class="card"><div class="cb"><p class="empty">No registrations yet.</p></div></div>';
+                    return;
+                }
+                c.innerHTML = `
+            <div class="stats" style="margin-bottom:1.5rem">
+              <div class="stat"><div class="sv">${regs.length}</div><div class="sl">Total Registered</div></div>
+            </div>
+            <div class="card"><div class="ch"><h3>👥 Participants</h3></div>
+            <table><thead><tr><th>Name</th><th>Email</th><th>Date</th></tr></thead>
+            <tbody>${regs.map(r => `<tr>
+              <td style="font-weight:500">${r.userName || '—'}</td>
+              <td style="color:var(--muted)">${r.userEmail || '—'}</td>
+              <td style="color:var(--muted)">${new Date(r.registeredAt).toLocaleDateString('en-GB')}</td>
+            </tr>`).join('')}</tbody></table></div>`;
+            } catch { c.innerHTML = '<p style="color:var(--red)">Could not load registrations.</p>'; }
+        }
+
+        // ─── ALL EVENTS ───────────────────────────────────────────
+        function filterAll() {
+            const search = document.getElementById('allSearch').value.toLowerCase();
+            const type = document.getElementById('allType').value;
+            const source = document.getElementById('allSource').value;
+
+            const filtered = allEvents.filter(e => {
+                const ms = !search || e.title.toLowerCase().includes(search) || (e.description || '').toLowerCase().includes(search);
+                const mt = !type || e.type === type;
+                // source filter uses the real API source field
+                const mo = !source || e.source === source;
+                return ms && mt && mo;
+            });
+
+            const grid = document.getElementById('allGrid');
+            if (!filtered.length) { grid.innerHTML = '<div style="color:var(--muted);padding:2rem">No events found.</div>'; return; }
+
+            const user = getUser();
+            grid.innerHTML = filtered.map(e => {
+                const registered = evRegs(e);
+                const pct = e.capacity > 0 ? Math.min(100, Math.round(registered / e.capacity * 100)) : 0;
+                const full = pct >= 100;
+                const mine = e.organizerName === user?.name;
+                return `<div class="event-card">
+              <div class="ec-img"></div>
+              <div class="ec-body">
+                <div class="ec-meta">
+                  <div class="ec-type">${e.type}</div>
+                  <div class="ec-source">🎪 Vertex Events</div>
+                </div>
+                <div class="ec-title">${e.title}</div>
+                <div class="ec-detail"><span>📅</span><span>${fmt(evDate(e))}</span></div>
+                <div class="ec-detail"><span>📍</span><span>${e.location}</span></div>
+                <div class="ec-detail"><span>👤</span><span>${e.organizerName}</span></div>
+              </div>
+              <div class="ec-footer">
+                <div class="ec-cap">${registered}/${e.capacity}
+                  <div class="bar"><div class="bar-fill ${full ? 'full' : ''}" style="width:${pct}%"></div></div>
+                </div>
+                ${mine
+                        ? `<button class="btn btn-amber btn-sm" onclick="openEdit(${e.id})">Edit</button>`
+                        : full
+                            ? `<button class="btn btn-sm" style="background:var(--surface2);color:var(--muted);cursor:not-allowed">Full</button>`
+                            : `<button class="btn btn-ghost btn-sm">View</button>`}
+              </div>
+            </div>`;
+            }).join('');
+        }
+
+        document.querySelectorAll('.overlay').forEach(o => {
+            o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
+        });
+
+        window.addEventListener('load', () => {
+            loadHomeEvents();
+            const user = getUser();
+            if (user && getToken()) {
+                document.getElementById('sbName').textContent = user.name;
+                document.getElementById('sbEmail').textContent = user.email;
+                showScreen('appScreen');
+                appInit();
+            }
+        });
+    </script>
+</body>
+</html>
